@@ -1,11 +1,16 @@
 // Dashboard JavaScript
 
-const API_BASE = '/api';
+// Detect API base URL - use current origin for API calls
+const API_BASE = window.location.origin + '/api';
 
 // Load statistics
 async function loadStatistics() {
     try {
-        const response = await fetch(`${API_BASE}/statistics`);
+        const response = await fetch(`${API_BASE}/statistics`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         const data = await response.json();
         
         if (data.success) {
@@ -23,7 +28,11 @@ async function loadStatistics() {
 // Load categories for filter
 async function loadCategories() {
     try {
-        const response = await fetch(`${API_BASE}/categories`);
+        const response = await fetch(`${API_BASE}/categories`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         const data = await response.json();
         
         if (data.success) {
@@ -50,7 +59,11 @@ async function loadBusinesses() {
     if (category) url += `&category=${category}`;
     
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         const data = await response.json();
         
         if (data.success) {

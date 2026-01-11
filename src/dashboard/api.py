@@ -82,8 +82,7 @@ async def root():
 async def get_businesses(
     limit: int = Query(50, ge=1, le=500),
     platform: Optional[str] = None,
-    category: Optional[str] = None,
-    authenticated: bool = Depends(verify_credentials)
+    category: Optional[str] = None
 ):
     """Get list of discovered businesses with optional filters"""
     try:
@@ -103,7 +102,7 @@ async def get_businesses(
 
 
 @app.get("/api/statistics")
-async def get_statistics(authenticated: bool = Depends(verify_credentials)):
+async def get_statistics():
     """Get system statistics"""
     try:
         stats = db.get_statistics()
@@ -117,7 +116,7 @@ async def get_statistics(authenticated: bool = Depends(verify_credentials)):
 
 
 @app.get("/api/categories")
-async def get_categories(authenticated: bool = Depends(verify_credentials)):
+async def get_categories():
     """Get list of business categories"""
     try:
         categories = config.get_keywords()
@@ -139,7 +138,7 @@ async def get_categories(authenticated: bool = Depends(verify_credentials)):
 
 
 @app.get("/api/export/csv")
-async def export_csv(authenticated: bool = Depends(verify_credentials)):
+async def export_csv():
     """Export businesses to CSV"""
     try:
         import tempfile
