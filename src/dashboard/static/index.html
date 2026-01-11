@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Discovery Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .filters select, .filters button {
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .filters button {
+            background: #667eea;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .filters button:hover {
+            background: #5568d3;
+        }
+        
+        .business-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .business-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .business-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .business-card.high {
+            border-left-color: #dc3545;
+        }
+        
+        .business-card.medium {
+            border-left-color: #ffc107;
+        }
+        
+        .business-card.low {
+            border-left-color: #28a745;
+        }
+        
+        .business-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .business-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .priority-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .priority-badge.high {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .priority-badge.medium {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .priority-badge.low {
+            background: #28a745;
+            color: white;
+        }
+        
+        .business-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .business-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .business-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .view-button {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .view-button:hover {
+            background: #5568d3;
+        }
+        
+        .score {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Business Discovery Dashboard</h1>
+        <p>Real-time monitoring of newly discovered Nigerian businesses</p>
+    </div>
+    
+    <div class="container">
+        <div class="stats-grid" id="stats">
+            <div class="stat-card">
+                <h3>Total Businesses</h3>
+                <div class="value" id="total-count">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Last 24 Hours</h3>
+                <div class="value" id="recent-count">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Facebook Pages</h3>
+                <div class="value" id="facebook-count">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>LinkedIn Companies</h3>
+                <div class="value" id="linkedin-count">-</div>
+            </div>
+        </div>
+        
+        <div class="filters">
+            <select id="platform-filter">
+                <option value="">All Platforms</option>
+                <option value="Facebook">Facebook</option>
+                <option value="LinkedIn">LinkedIn</option>
+            </select>
+            
+            <select id="category-filter">
+                <option value="">All Categories</option>
+            </select>
+            
+            <button onclick="loadBusinesses()">Apply Filters</button>
+            <button onclick="exportCSV()">Export CSV</button>
+            <button onclick="location.reload()">Refresh</button>
+        </div>
+        
+        <div class="business-grid" id="businesses">
+            <div class="loading">Loading businesses...</div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
+

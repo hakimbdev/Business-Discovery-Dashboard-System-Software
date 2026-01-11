@@ -1,0 +1,130 @@
+# Main Configuration File for Business Discovery System
+
+# Database Configuration
+database:
+  type: "sqlite"  # Options: sqlite, postgresql
+  sqlite:
+    path: "data/businesses.db"
+  postgresql:
+    host: "localhost"
+    port: 5432
+    database: "business_discovery"
+    user: "your_username"
+    password: "your_password"
+
+# API Keys and Credentials
+api_keys:
+  # Facebook Graph API
+  facebook:
+    app_id: "YOUR_FACEBOOK_APP_ID"
+    app_secret: "YOUR_FACEBOOK_APP_SECRET"
+    access_token: "YOUR_FACEBOOK_ACCESS_TOKEN"
+    
+  # Google Custom Search (for SERP monitoring)
+  google:
+    api_key: "YOUR_GOOGLE_API_KEY"
+    search_engine_id: "YOUR_SEARCH_ENGINE_ID"
+    
+  # Telegram Bot (for alerts)
+  telegram:
+    bot_token: "YOUR_TELEGRAM_BOT_TOKEN"
+    chat_id: "YOUR_TELEGRAM_CHAT_ID"
+    
+  # Email (SMTP for alerts)
+  email:
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    sender_email: "your_email@gmail.com"
+    sender_password: "your_app_password"
+    recipient_email: "recipient@example.com"
+
+# Scheduler Configuration
+scheduler:
+  # Run discovery tasks every X minutes
+  facebook_interval_minutes: 30
+  linkedin_interval_minutes: 45
+  google_interval_minutes: 60
+  
+  # Enable/disable specific scrapers
+  enable_facebook: true
+  enable_linkedin: true
+  enable_google: true
+
+# Rate Limiting (to avoid bans)
+rate_limiting:
+  # Requests per minute
+  facebook_rpm: 10
+  linkedin_rpm: 5
+  google_rpm: 10
+  
+  # Delay between requests (seconds)
+  request_delay_min: 2
+  request_delay_max: 5
+  
+  # Use proxy rotation
+  use_proxies: false
+  proxy_list: []
+
+# Scraping Configuration
+scraping:
+  # User agents for rotation
+  user_agents:
+    - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    - "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+  
+  # Headless browser settings
+  headless: true
+  browser_timeout: 30
+  
+  # LinkedIn specific
+  linkedin:
+    use_session: false  # Set to true if you want to use authenticated session
+    session_cookie: ""
+
+# Alert Configuration
+alerts:
+  # Enable/disable alert channels
+  enable_email: true
+  enable_telegram: true
+  enable_desktop: true
+  
+  # Alert priority thresholds
+  high_priority_score: 80
+  medium_priority_score: 60
+  
+  # Batch alerts (send summary every X hours instead of instant)
+  batch_mode: false
+  batch_interval_hours: 4
+
+# Dashboard Configuration
+dashboard:
+  host: "0.0.0.0"
+  port: 8000
+  debug: false
+  
+  # Authentication (basic auth)
+  enable_auth: true
+  username: "admin"
+  password: "changeme123"
+
+# Export Configuration
+export:
+  # Auto-export to CSV daily
+  auto_export: true
+  export_path: "exports/"
+  
+  # Google Sheets integration
+  google_sheets:
+    enabled: false
+    credentials_file: "config/google_credentials.json"
+    spreadsheet_id: "YOUR_SPREADSHEET_ID"
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "logs/system.log"
+  max_size_mb: 10
+  backup_count: 5
+  console_output: true
+

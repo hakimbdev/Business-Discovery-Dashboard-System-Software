@@ -1,0 +1,55 @@
+# Core Dependencies
+python-dotenv==1.0.0
+pyyaml==6.0.1
+
+# Web Framework & API
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+
+# HTTP Requests & Web Scraping
+requests==2.31.0
+beautifulsoup4==4.12.3
+lxml==5.1.0
+
+# Browser Automation (Optional - for advanced scraping)
+selenium==4.17.2
+playwright==1.41.0
+
+# Scheduling
+apscheduler==3.10.4
+
+# Database
+# SQLite is built-in to Python
+# For PostgreSQL support (optional):
+# psycopg2-binary==2.9.9
+
+# Data Processing
+pandas==2.2.0
+
+# Alerts & Notifications
+# Email is built-in to Python (smtplib)
+# For desktop notifications:
+plyer==2.1.0
+
+# Logging
+# Built-in to Python
+
+# Utilities
+python-dateutil==2.8.2
+
+# Google Custom Search API
+google-api-python-client==2.116.0
+
+# Optional: For Google Sheets export
+# google-auth==2.27.0
+# google-auth-oauthlib==1.2.0
+# google-auth-httplib2==0.2.0
+# gspread==6.0.0
+
+# Development Dependencies (Optional)
+# pytest==8.0.0
+# pytest-asyncio==0.23.4
+# black==24.1.1
+# flake8==7.0.0
+

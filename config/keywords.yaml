@@ -1,0 +1,157 @@
+# Business Category Keywords Configuration
+# This file defines the keywords and signals for detecting Nigerian businesses
+
+business_categories:
+  startups:
+    keywords:
+      - "startup"
+      - "tech startup"
+      - "innovation hub"
+      - "tech company"
+      - "software company"
+      - "digital agency"
+      - "fintech"
+      - "edtech"
+      - "agritech"
+    priority: high
+    
+  hotels:
+    keywords:
+      - "hotel"
+      - "resort"
+      - "lodge"
+      - "guest house"
+      - "hospitality"
+      - "accommodation"
+    priority: high
+    
+  suites_apartments:
+    keywords:
+      - "suite"
+      - "apartment"
+      - "serviced apartment"
+      - "short let"
+      - "airbnb"
+      - "vacation rental"
+    priority: medium
+    
+  travel_tour:
+    keywords:
+      - "travel agency"
+      - "tour operator"
+      - "travel and tour"
+      - "tourism"
+      - "travel services"
+      - "tour company"
+      - "logistics"
+    priority: high
+    
+  real_estate:
+    keywords:
+      - "real estate"
+      - "property developer"
+      - "estate developer"
+      - "property management"
+      - "real estate company"
+      - "land developer"
+    priority: high
+    
+  schools:
+    keywords:
+      - "school"
+      - "academy"
+      - "college"
+      - "university"
+      - "educational institution"
+      - "learning center"
+      - "training institute"
+      - "nursery school"
+      - "primary school"
+      - "secondary school"
+    priority: medium
+    
+  restaurants:
+    keywords:
+      - "restaurant"
+      - "café"
+      - "eatery"
+      - "food court"
+      - "fast food"
+      - "lounge"
+      - "bar and grill"
+      - "catering"
+    priority: medium
+
+# Nigerian Location Signals
+location_signals:
+  country:
+    - "Nigeria"
+    - "Nigerian"
+    - "NG"
+    
+  major_cities:
+    - "Lagos"
+    - "Abuja"
+    - "Port Harcourt"
+    - "Kano"
+    - "Ibadan"
+    - "Benin City"
+    - "Kaduna"
+    - "Enugu"
+    - "Warri"
+    - "Calabar"
+    - "Owerri"
+    - "Abeokuta"
+    - "Jos"
+    - "Ilorin"
+    - "Akure"
+    
+  states:
+    - "Lagos State"
+    - "FCT"
+    - "Rivers State"
+    - "Kano State"
+    - "Oyo State"
+    - "Edo State"
+    - "Kaduna State"
+    - "Enugu State"
+    - "Delta State"
+    - "Cross River State"
+    - "Imo State"
+    - "Ogun State"
+    - "Plateau State"
+    - "Kwara State"
+    - "Ondo State"
+    
+  phone_patterns:
+    - "+234"
+    - "0803"
+    - "0806"
+    - "0810"
+    - "0813"
+    - "0814"
+    - "0816"
+    - "0903"
+    - "0906"
+    - "0705"
+    - "0805"
+    - "0807"
+    - "0811"
+    - "0815"
+    - "0905"
+    - "0915"
+
+# Detection Settings
+detection:
+  # How far back to look for "new" pages (in days)
+  lookback_days: 7
+  
+  # Minimum confidence score (0-100) to trigger alert
+  min_confidence_score: 60
+  
+  # Maximum results per search query
+  max_results_per_query: 50
+  
+  # Time-based filters for Google searches
+  google_time_filter: "qdr:w"  # Past week (qdr:d for day, qdr:w for week, qdr:m for month)
+
